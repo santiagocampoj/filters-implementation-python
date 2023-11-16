@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import sounddevice as sd
 import time
 from scipy.fft import fft, fftfreq
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Setting up the constants for the low pass filter,
 # the cutoff frequency is 0.5 times the Nyquist frequency, which is 500 Hz
@@ -25,15 +28,12 @@ input_signal = np.sin(2 * np.pi * 5 * t) + np.sin(2 * np.pi * 50 * t)
 # Filtering the signal
 filtered_signal = signal.lfilter(b, a, input_signal)
 
-# Play the original signal
+# Play the original and filtered signals
 sd.play(input_signal, fs)
-sd.wait()  # Wait until the sound is played
-
-time.sleep(1)  # Wait for 1 second
-
-# Play the filtered signal
+sd.wait() 
+time.sleep(1)
 sd.play(filtered_signal, fs)
-sd.wait()  # Wait until the sound is played
+sd.wait()
 
 
 # Plotting the signals and frequency spectrum
@@ -70,7 +70,10 @@ axs[2].legend()
 
 # Adjust layout
 plt.tight_layout()
-plt.savefig(f'high_pass_filter_freq_resp_{CUTOFF_FREQ}.png')
+
+os.makedirs(f'{current_dir}/plots', exist_ok=True)
+plt.savefig(f'{current_dir}/plots/high_pass_filter_{CUTOFF_FREQ}.png')
+
 
 
 # Plotting the spectrogram
@@ -100,5 +103,5 @@ fig.colorbar(pcm, cax=cbar_ax, label='Magnitude (dB)')
 # Adjust layout
 plt.tight_layout()
 plt.subplots_adjust(right=0.9)  # Make room for the new colorbar
-plt.savefig(f'high_pass_filter_pectrogram_{CUTOFF_FREQ}.png')
+plt.savefig(f'{current_dir}/plots/high_pass_filter_pectrogram_{CUTOFF_FREQ}.png')
 plt.show()
