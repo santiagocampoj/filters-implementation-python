@@ -11,7 +11,7 @@ CUTOFF_FREQ = 0.5
 # Creating the low-pass filter
 cutoff_frequency = CUTOFF_FREQ
 order = 6
-b, a = signal.butter(order, cutoff_frequency, 'low', analog=False)
+b, a = signal.butter(order, cutoff_frequency, 'high', analog=False)
 
 # Sampling frequency
 fs = 1000
@@ -29,9 +29,9 @@ plt.plot(t, input_signal, label='Original Signal')
 plt.plot(t, filtered_signal, label='Filtered Signal')
 plt.xlabel('Time [seconds]')
 plt.ylabel('Amplitude')
-plt.title(f'Low Pass Filter with cutoff frequency {CUTOFF_FREQ}')
+plt.title(f'High Pass Filter with cutoff frequency {CUTOFF_FREQ}')
 plt.legend()
-plt.savefig(f'low_pass_filter_{CUTOFF_FREQ}.png')
+plt.savefig(f'high_pass_filter_{CUTOFF_FREQ}.png')
 # plt.show()
 
 # Play the original signal
@@ -55,5 +55,5 @@ plt.xlabel('Frequency [radians / second]')
 plt.ylabel('Amplitude [dB]')
 plt.margins(0, 0.1)
 plt.grid(which='both', axis='both')
-plt.savefig(f'low_pass_filter_{CUTOFF_FREQ}_freq_response.png')
+plt.savefig(f'high_pass_filter_{CUTOFF_FREQ}_freq_response.png')
 plt.show()
