@@ -71,7 +71,6 @@ axs[2].legend()
 # Adjust layout
 plt.tight_layout()
 plt.savefig(f'low_pass_filter_freq_resp_{CUTOFF_FREQ}.png')
-plt.show()
 
 
 # Plotting the spectrogram
